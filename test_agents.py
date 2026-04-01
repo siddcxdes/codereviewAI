@@ -7,7 +7,7 @@ repo = "siddcxdes/codereview-test"  # ← your GitHub username
 pr_number = 1  
 
 # Step 1: Get the real code from GitHub
-print("📥 Fetching PR files from GitHub...")
+print("Fetching PR files from GitHub...")
 files = get_pr_files(repo, pr_number)
 
 # Step 2: Run all agents on the code
@@ -37,6 +37,6 @@ for file_result in review["results"]:
                 problem = issue.get('problem', 'N/A')
                 fix = issue.get('fix', 'N/A')
                 print(f"   [{severity}] {problem}")
-                print(f"   💡 Fix: {fix}")
+                print(f" Fix: {fix}")
         else:
-            print("   ✅ No issues found!")
+            print("No issues found!")

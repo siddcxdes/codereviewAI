@@ -1,19 +1,21 @@
-# Server
-fastapi
-uvicorn
+# Web Server & API Framework
+fastapi==0.115.0
+uvicorn==0.30.6
+pydantic==2.12.5
 
 # Environment variables
-python-dotenv
+python-dotenv==1.0.1
 
 # HTTP requests (to call GitHub API)
-requests
-
-# Google Gemini AI
-google-generativeai
+requests==2.32.5
 
 # Database
-sqlalchemy
-psycopg2-binary
+sqlalchemy==2.0.44
+psycopg2-binary==2.9.11
+
+# AI Agents & LLM Integration
+langchain-openai==1.1.12
+langchain-core==1.2.23
 
 # GitHub webhook security (verify requests are really from GitHub)
-cryptography
+cryptography==46.0.3
