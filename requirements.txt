@@ -1,0 +1,19 @@
+# Server
+fastapi
+uvicorn
+
+# Environment variables
+python-dotenv
+
+# HTTP requests (to call GitHub API)
+requests
+
+# Google Gemini AI
+google-generativeai
+
+# Database
+sqlalchemy
+psycopg2-binary
+
+# GitHub webhook security (verify requests are really from GitHub)
+cryptography
