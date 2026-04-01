@@ -63,7 +63,7 @@
                         <h2>Integration</h2>
                     </div>
                     <div class="integration-content">
-                        <p class="integration-desc">Provide the following endpoint to your GitHub repository webhook configuration to enable automated reviews.</p>
+                        <p class="integration-desc">To enable automated PR reviews, go to your repository's <strong>Settings &gt; Webhooks &gt; Add webhook</strong> and configure the following endpoint:</p>
                         
                         <div class="code-block">
                             <div class="code-header">
@@ -71,9 +71,9 @@
                                 <span class="path">/webhook</span>
                             </div>
                             <div class="code-body">
-                                <code>Payload URL: https://[your-domain]/webhook</code>
+                                <code>Payload URL: https://codereviewai-29mw.onrender.com/webhook</code>
                                 <code>Content type: application/json</code>
-                                <code>Trigger: Pull Request events</code>
+                                <code>Trigger: Pull Request events (opened, synchronize)</code>
                             </div>
                         </div>
                     </div>
