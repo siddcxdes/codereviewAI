@@ -6,11 +6,13 @@ import json
 
 load_dotenv()
 
+api_key = os.getenv("POLLINATIONS_API_KEY")
+
 llm = ChatOpenAI(
-    api_key=os.getenv("POLLINATIONS_API_KEY"),
-    base_url="https://text.pollinations.ai/openai",
     model="openai",
-    temperature=0
+    base_url="https://gen.pollinations.ai/v1",
+    api_key=api_key,
+    temperature=0.3
 )
 
 def analyze_code(system_prompt: str, code: str) -> str:

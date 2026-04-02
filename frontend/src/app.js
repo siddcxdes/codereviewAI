@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function checkBackendStatus() {
         try {
-            const response = await fetch('http://127.0.0.1:8000/');
+            const response = await fetch('https://codereviewai-29mw.onrender.com/');
             
             if (response.ok) {
                 const data = await response.json();
@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
         analyzeBtn.disabled = true;
 
         try {
-            const response = await fetch('http://127.0.0.1:8000/api/analyze', {
+            const response = await fetch('https://codereviewai-29mw.onrender.com/api/analyze', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
