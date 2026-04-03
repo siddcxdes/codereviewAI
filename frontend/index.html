@@ -61,7 +61,12 @@
                 <section class="panel quick-analyze">
                     <div class="panel-header"><h2>Launch Analysis</h2></div>
                     <div class="manual-analysis-content">
-                        <p class="integration-desc">Initiate a secure review by specifying the repository location and PR identifier. Sign in to retain analytical records.</p>
+                        <div class="integration-desc" style="background: #f8fafc; padding: 1.25rem; border-radius: 8px; border: 1px solid var(--border-light); margin-bottom: 2rem; font-size: 0.95rem;">
+                            <strong style="color: var(--accent); display: block; margin-bottom: 0.5rem;">🔄 GitHub Webhook Setup</strong>
+                            To enable automatic reviews when you open a Pull Request, go to your GitHub Repository Settings &rarr; Webhooks, and add a new webhook pointing to:<br>
+                            <code style="background: var(--bg-surface-solid); padding: 0.4rem 0.6rem; border-radius: 4px; border: 1px solid var(--border-light); margin-top: 0.75rem; display: inline-block; font-family: var(--font-mono); color: var(--accent); font-weight: 600;">https://codereviewai-29mw.onrender.com</code>
+                        </div>
+                        <p class="integration-desc">Initiate a secure review manually by specifying the repository location and PR identifier. Sign in to retain analytical records.</p>
                         <form id="analyze-form" class="analyze-form">
                             <div class="input-group">
                                 <label for="repo-input">Repository Path</label>

@@ -1,4 +1,7 @@
 from fastapi import FastAPI, Depends, Request
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
+
 from fastapi.middleware.cors import CORSMiddleware
 from routes.webhook import router as webhook_router
 from pydantic import BaseModel
@@ -20,9 +23,13 @@ app.add_middleware(
 
 app.include_router(webhook_router)
 
+
+app.mount("/src", StaticFiles(directory="frontend/src"), name="src")
+
 @app.get("/")
-def home():
-    return {"message": "CodeReview AI is running!"}
+def serve_index():
+    return FileResponse("frontend/index.html")
+
 
 class AuthRequest(BaseModel):
     username: str
@@ -70,6 +77,12 @@ class ManualReviewRequest(BaseModel):
 @app.post("/api/analyze")
 async def analyze_pr_manual(request_data: ManualReviewRequest, request: Request, db: Session = Depends(get_db)):
     print(f"\nManual analysis requested!")
+    
+    # Enforce Auth
+    token = request.headers.get("Authorization")
+    user = crud.get_user_by_token(db, token) if token else None
+    if not user:
+        return {"status": "error", "message": "Access Denied. You must be logged in to analyze a PR."}
     print(f"Repo: {request_data.repo_name}")
     print(f"PR #{request_data.pr_number}")
     

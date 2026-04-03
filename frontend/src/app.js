@@ -1,4 +1,4 @@
-const API_BASE = "http://localhost:8000/api";
+const API_BASE = window.location.protocol === "file:" ? "http://localhost:8000/api" : "/api";
 
 // Elements
 const authSection = document.getElementById("auth-section");
@@ -38,12 +38,16 @@ function checkAuthStatus() {
         userGreeting.classList.remove("hidden");
         usernameDisplay.textContent = username;
         historySection.classList.remove("hidden");
+        document.getElementById("analyze-btn").disabled = false;
+        document.getElementById("analyze-btn").innerText = "Run Secure Scan";
         loadHistory();
     } else {
         // Not logged in
         authControls.classList.remove("hidden");
         userGreeting.classList.add("hidden");
         historySection.classList.add("hidden");
+        document.getElementById("analyze-btn").disabled = true;
+        document.getElementById("analyze-btn").innerText = "Sign in to Analyze PR";
     }
 }
 
@@ -185,7 +189,7 @@ document.getElementById("analyze-form").addEventListener("submit", async (e) => 
     } catch (err) {
         resultsContainer.innerHTML = `<div class="error-message" style="margin:2rem">Integration Error: Remote services unavailable.</div>`;
     } finally {
-        analyzeBtn.disabled = false;
+        if (getToken()) analyzeBtn.disabled = false;
         loadingSection.classList.add("hidden");
         resultsContainer.classList.remove("hidden");
     }

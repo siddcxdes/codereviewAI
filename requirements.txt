@@ -19,3 +19,7 @@ langchain-core==1.2.23
 
 # GitHub webhook security (verify requests are really from GitHub)
 cryptography==46.0.3
+
+# bcrypt for password hashing
+bcrypt==4.0.1
+aiofiles==23.2.1
