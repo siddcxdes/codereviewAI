@@ -3,87 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CodeReview - Automated Assurance</title>
+    <title>CodeReview AI - Professional Assurance</title>
+    <!-- High-end glowing dark SVG favicon (Emerald Checkmark on Slate Gradient) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><defs><linearGradient id=%22g%22 x1=%220%25%22 y1=%220%25%22 x2=%22100%25%22 y2=%22100%25%22><stop offset=%220%25%22 stop-color=%22%230f172a%22/><stop offset=%22100%25%22 stop-color=%22%23334155%22/></linearGradient></defs><rect width=%22100%22 height=%22100%22 rx=%2224%22 fill=%22url(%23g)%22/><path d=%22M 28 53 L 42 66 L 74 34%22 fill=%22none%22 stroke=%22%2310b981%22 stroke-width=%2212%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/></svg>">
     <link rel="stylesheet" href="src/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="layout-wrapper">
         <header class="app-header">
             <div class="header-content">
                 <div class="brand">
-                    <span class="brand-monogram">CR</span>
-                    <span class="brand-name">CodeReview</span>
+                    <div class="brand-monogram">CR</div>
+                    <span class="brand-name">CodeReview 
                 </div>
-                <div class="connection-status">
-                    <span class="status-dot"></span>
-                    <span id="backend-status" class="status-label">Initializing...</span>
+                
+                <!-- Auth Controls -->
+                <div class="auth-controls" id="auth-controls">
+                    <button class="btn-text" onclick="showAuth('login')">Sign in</button>
+                    <button class="btn-secondary" onclick="showAuth('signup')">Create account</button>
+                </div>
+                <div class="user-greeting hidden" id="user-greeting">
+                    <span class="user-welcome">Account: <span id="username-display" class="user-name">User</span></span>
+                    <button class="btn-text" onclick="logout()">Sign out</button>
                 </div>
             </div>
         </header>
 
         <main class="app-content">
-            <section class="hero">
-                <h1 class="hero-title">Automated Pull Request Analysis</h1>
-                <p class="hero-subtitle">Continuous code quality assurance integrated directly into your GitHub workflow.</p>
-            </section>
-
-            <section class="panel quick-analyze">
-                <div class="panel-header">
-                    <h2>Manual PR Analysis</h2>
-                </div>
-                <div class="manual-analysis-content">
-                    <p class="integration-desc">Instantly analyze any pending Pull Request by providing the repository and PR number.</p>
-                    <form id="analyze-form" class="analyze-form">
-                        <div class="input-group">
-                            <label for="repo-input">Repository (e.g., owner/repo)</label>
-                            <input type="text" id="repo-input" placeholder="facebook/react" required>
-                        </div>
-                        <div class="input-group">
-                            <label for="pr-input">PR Number</label>
-                            <input type="number" id="pr-input" placeholder="12345" required min="1">
-                        </div>
-                        <button type="submit" id="analyze-btn" class="btn-primary">Analyze PR</button>
-                    </form>
-                    
-                    <div id="loading-state" class="state-container hidden">
-                        <div class="spinner"></div>
-                        <p>Analyzing repository code... This may take a minute.</p>
+            
+            <!-- Auth Modal/Section (Hidden by default) -->
+            <section id="auth-section" class="panel auth-panel hidden">
+                <div class="panel-header"><h2 id="auth-title">Sign in to your account</h2></div>
+                <div class="auth-content form-container">
+                    <p id="auth-error" class="hidden error-message"></p>
+                    <div class="input-group">
+                        <label>Username</label>
+                        <input type="text" id="auth-username" class="form-input" placeholder="Enter your username">
                     </div>
-
-                    <div id="results-container" class="results-container hidden">
-                        <!-- Results will be injected here -->
+                    <div class="input-group">
+                        <label>Password</label>
+                        <input type="password" id="auth-password" class="form-input" placeholder="Enter your password">
+                    </div>
+                    <button class="btn-primary form-submit" id="auth-submit-btn">Continue</button>
+                    <div class="auth-footer">
+                        <a href="#" onclick="toggleAuthMode(); return false;" id="auth-toggle-link" class="auth-link">Don't have an account? Sign up</a>
                     </div>
                 </div>
             </section>
 
-            <div class="dashboard-grid">
-                <section class="panel">
-                    <div class="panel-header">
-                        <h2>Integration</h2>
-                    </div>
-                    <div class="integration-content">
-                        <p class="integration-desc">To enable automated PR reviews, go to your repository's <strong>Settings &gt; Webhooks &gt; Add webhook</strong> and configure the following endpoint:</p>
+            <!-- Main App Area -->
+            <div id="main-app">
+                <section class="hero">
+                    <h1 class="hero-title">PULL REQUEST ANALYSIS</h1>
+                    <p class="hero-subtitle">Comprehensive code quality assurance safely integrated with your enterprise workflow. Streamline reviews and enforce technical standards.</p>
+                </section>
+
+                <section class="panel quick-analyze">
+                    <div class="panel-header"><h2>Launch Analysis</h2></div>
+                    <div class="manual-analysis-content">
+                        <p class="integration-desc">Initiate a secure review by specifying the repository location and PR identifier. Sign in to retain analytical records.</p>
+                        <form id="analyze-form" class="analyze-form">
+                            <div class="input-group">
+                                <label for="repo-input">Repository Path</label>
+                                <input type="text" id="repo-input" class="form-input" placeholder="organization/repository" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="pr-input">Pull Request ID</label>
+                                <input type="number" id="pr-input" class="form-input" placeholder="e.g. 210" required min="1">
+                            </div>
+                            <button type="submit" id="analyze-btn" class="btn-primary">Run Secure Scan</button>
+                        </form>
                         
-                        <div class="code-block">
-                            <div class="code-header">
-                                <span class="method">POST</span>
-                                <span class="path">/webhook</span>
-                            </div>
-                            <div class="code-body">
-                                <code>Payload URL: https://codereviewai-29mw.onrender.com/webhook</code>
-                                <code>Content type: application/json</code>
-                                <code>Trigger: Pull Request events (opened, synchronize)</code>
-                            </div>
+                        <div id="loading-state" class="state-container hidden">
+                            <div class="spinner"></div>
+                            <p class="loading-text">Processing code metrics... Please wait.</p>
                         </div>
+
+                        <div id="results-container" class="results-container hidden"></div>
                     </div>
                 </section>
+
+                <!-- History Section (Hidden if not logged in) -->
+                <section class="panel history-panel hidden" id="history-section">
+                    <div class="panel-header"><h2>Analytical History</h2></div>
+                    <div class="history-content" id="history-container">
+                        <!-- JS injects history here -->
+                        <div class="empty-state">No historical analysis records found.</div>
+                    </div>
+                </section>
+
             </div>
         </main>
 
         <footer class="app-footer">
             <div class="footer-content">
-                <p>&copy; 2026 CodeReview Infrastructure. Internal developer tools.</p>
+                <p>&copy; Made with <3.</p>
             </div>
         </footer>
     </div>
