@@ -1,4 +1,4 @@
-const API_BASE = window.location.protocol === "file:" ? "http://localhost:8000/api" : "/api";
+const API_BASE = "https://codereviewai-29mw.onrender.com/api";
 
 // Elements
 const authSection = document.getElementById("auth-section");
